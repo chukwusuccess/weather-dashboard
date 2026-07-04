@@ -265,38 +265,16 @@ body {
   background: var(--moon-dark);
 }
 
-/* Moon 1: New Moon */
-.m1 { left: 10%; top: 160px; }
-
-/* Moon 2: Waxing Crescent */
-.m2 { left: 25%; top: 80px; }
-.m2 .dark-shadow {
-  left: 20%; /* Pushes dark shadow right, leaving a light sliver on left */
-  border-radius: 50%; /* Gives the crescent curve */
-  transform: scale(1.2); /* Helps round out the shadow properly */
-}
-
-/* Moon 3: Quarter Moon (Active) */
-.m3 { left: 50%; top: 30px; }
-.m3 .dark-shadow {
-  left: 50%; /* Perfect vertical half split */
-}
-
-/* Moon 4: Waxing Gibbous */
-.m4 { left: 75%; top: 80px; }
-.m4 .light-side {
-  left: 30%; /* Large white area on right, dark sliver on left */
-  border-radius: 50%;
-  transform: scale(1.2);
-}
-.m4 .dark-shadow {
-  display: none; /* Invert the trick for gibbous */
-}
-
-/* Moon 5: Full Moon */
-.m5 { left: 90%; top: 160px; background: var(--moon-light); }
-
-
+/* Perfect circle math: fixed radius = 135px, equal angles (38deg apart) */
+.m1 { transform: translate(-50%, 50%) rotate(-76deg) translateY(-135px) rotate(76deg); box-shadow: none; border: 1px solid var(--border-subtle); }
+.m2 { transform: translate(-50%, 50%) rotate(-38deg) translateY(-135px) rotate(38deg); }
+.m2 .dark-shadow { left: 20%; border-radius: 50%; transform: scale(1.2); }
+.m3.active { transform: translate(-50%, 50%) rotate(0deg) translateY(-135px) rotate(0deg); }
+.m3 .dark-shadow { left: 50%; }
+.m4 { transform: translate(-50%, 50%) rotate(38deg) translateY(-135px) rotate(-38deg); }
+.m4 .light-side { left: 30%; border-radius: 50%; transform: scale(1.2); }
+.m4 .dark-shadow { display: none; }
+.m5 { transform: translate(-50%, 50%) rotate(76deg) translateY(-135px) rotate(-76deg); background: var(--moon-light); }
 /* Craters logic (optional detail based on image) */
 .crater {
   position: absolute;
