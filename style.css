@@ -74,6 +74,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
 }
 
 /* Time Pill */
@@ -89,11 +90,13 @@ body {
   box-shadow: var(--time-shadow);
   transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
   color: var(--text-main);
+  white-space: nowrap;
 }
 .theme-btn {
   cursor: pointer;
   border: none;
   outline: none;
+  padding: 10px;
 }
 .theme-btn:hover {
   opacity: 0.8;
@@ -387,10 +390,12 @@ body {
   align-items: center;
   background: var(--card-bg);
   border-radius: 20px;
-  padding: 4px 16px;
+  padding: 8px 16px;
   box-shadow: var(--time-shadow);
   transition: all 0.3s ease;
   border: 1px solid transparent;
+  flex: 1;
+  min-width: 100px;
 }
 .search-container:focus-within {
   border-color: var(--accent);
@@ -539,4 +544,12 @@ body.light-mode .suggestion-item:hover {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-weight: 400;
+}
+
+@media (max-width: 600px) {
+  .header { gap: 8px; }
+  .time-pill { padding: 6px 10px; font-size: 12px; }
+  .search-container { padding: 6px 10px; }
+  .search-container input { font-size: 12px; }
+  .theme-btn { padding: 8px; }
 }
