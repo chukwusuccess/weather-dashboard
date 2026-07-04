@@ -390,26 +390,6 @@ body {
   .dashboard { padding: 16px; }
   .bottom-section { grid-template-columns: 1fr; }
   .moon-container { margin-top: 30px; }
-  
-  /* Right-align the content of the small cards */
-  .small-card {
-    text-align: right;
-    align-items: flex-end;
-  }
-  
-  /* Keep the title on the left side of the card */
-  .card-title {
-    width: 100%;
-    justify-content: flex-start;
-  }
-  
-  /* Ensure the compass aligns to the right as well */
-  .compass {
-    margin: 0 0 0 auto;
-  }
-}
-  .bottom-section { grid-template-columns: 1fr; }
-  .moon-container { margin-top: 30px; }
 }
 
 /* Search Input & Error Toast */
