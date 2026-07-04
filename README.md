@@ -26,7 +26,9 @@ weather-dashboard/
 ├── index.html     # Main HTML structure and SVG decorations
 ├── style.css      # All styling, responsive breakpoints, and theme variables
 ├── script.js      # Time logic, theme toggle, and forecast data populator
-└── README.md      # Project documentation
+├── README.md      # Project documentation
+└── assets/
+    └── icons/       # Custom icon assets
 ```
 
 ## 🚀 Getting Started
