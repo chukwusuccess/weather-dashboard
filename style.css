@@ -5,7 +5,7 @@
   --sidebar-bg: #15171a;
   --text-main: #ffffff;
   --text-muted: #838a90;
-  --accent: #5ce5d5;
+  --accent: #58FCF4;
   --border-subtle: rgba(255,255,255,0.2);
   --moon-dark: #1b1c28;
   --moon-dark-crater: #232533;
@@ -179,7 +179,7 @@ body {
 /* UV Bar */
 .uv-bar {
   height: 4px;
-  background: linear-gradient(90deg, #5ce5d5, #b15ce5);
+  background: linear-gradient(90deg, #58FCF4, #b15ce5);
   border-radius: 2px;
   position: relative;
   width: 100%;
