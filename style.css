@@ -496,7 +496,8 @@ body {
   position: absolute;
   top: 100%;
   left: 0;
-  width: 260px;
+  right: 0; /* Attach to both left and right edges */
+  width: 100%; /* Take full width of parent */
   /* Use card-bg but slightly transparent for blur effect */
   background: var(--card-bg);
   backdrop-filter: blur(12px);
