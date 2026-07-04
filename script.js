@@ -1,7 +1,5 @@
-// Initialize Lucide icons
 lucide.createIcons();
 
-// Update Time
 function updateTime() {
   const now = new Date();
   const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }).replace(':', ' : ');
@@ -10,7 +8,6 @@ function updateTime() {
 setInterval(updateTime, 1000);
 updateTime();
 
-// Populate Forecast (Lazy ponytail: avoid repeating HTML)
 const forecastData = [
   { time: '4:00', icon: 'cloud-rain', speed: '15km/h', temp: '20°' },
   { time: '5:00', icon: 'cloud-drizzle', speed: '15km/h', temp: '20°' },
@@ -31,14 +28,14 @@ forecastData.forEach(f => {
   list.innerHTML += `
     <div class="forecast-item">
       <div class="f-time">${f.time}</div>
-      <div class="f-dot">.......</div>
+      <div class="f-line"></div>
       <div class="f-icon-col">
-        <i data-lucide="${f.icon}" class="icon-sm"></i>
+        <i data-lucide="${f.icon}" class="icon-sm" style="color: #5ce5d5;"></i>
         <span class="f-speed">${f.speed}</span>
       </div>
-      <div class="f-dot">.......</div>
+      <div class="f-line"></div>
       <div class="f-temp">${f.temp}</div>
     </div>
   `;
 });
-lucide.createIcons(); // re-init for dynamic content
+lucide.createIcons();
