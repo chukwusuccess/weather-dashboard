@@ -219,40 +219,40 @@ body {
 }
 .moon-arc {
   width: 100%;
-  max-width: 320px;
-  height: 160px;
+  max-width: 400px;
+  height: 190px;
   position: relative;
   margin-top: 10px;
 }
 .moon {
   position: absolute;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: var(--moon-dark);
-  box-shadow: inset -5px 0 0 var(--moon-light);
+  box-shadow: inset -6px 0 0 var(--moon-light);
   transition: background 0.3s ease, box-shadow 0.3s ease;
-  transform: translate(-50%, -50%); /* Centers the moon perfectly on its exact X/Y coordinates */
+  transform: translate(-50%, -50%); 
 }
 .moon.active {
-  width: 76px;
-  height: 76px;
+  width: 88px;
+  height: 88px;
   background: var(--moon-light);
-  box-shadow: inset 38px 0 0 var(--moon-dark), 0 0 20px var(--moon-glow);
+  box-shadow: inset 44px 0 0 var(--moon-dark), 0 0 20px var(--moon-glow);
 }
-/* Plotting the perfect arc with exact coordinates */
-.m1 { left: 10%; top: 130px; box-shadow: none; border: 1px solid var(--border-subtle); }
-.m2 { left: 30%; top: 80px; box-shadow: inset -8px 0 0 var(--moon-light); }
-.m3.active { left: 50%; top: 40px; }
-.m4 { left: 70%; top: 80px; box-shadow: inset 8px 0 0 var(--moon-light); }
-.m5 { left: 90%; top: 130px; box-shadow: inset 18px 0 0 var(--moon-light); background: var(--moon-light); }
+/* Calculated semi-circle points mapped to % width and px height */
+.m1 { left: 5%; top: 160px; box-shadow: none; border: 1px solid var(--border-subtle); }
+.m2 { left: 18%; top: 68px; box-shadow: inset -10px 0 0 var(--moon-light); }
+.m3.active { left: 50%; top: 30px; }
+.m4 { left: 82%; top: 68px; box-shadow: inset 10px 0 0 var(--moon-light); }
+.m5 { left: 95%; top: 160px; box-shadow: inset 22px 0 0 var(--moon-light); background: var(--moon-light); }
 
 .moon-label {
   color: var(--accent);
   font-size: 11px;
   letter-spacing: 2px;
   font-weight: 500;
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 /* Sidebar */
