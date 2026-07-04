@@ -205,7 +205,7 @@ async function fetchWeather(lat, lon, locationName) {
           <div class="f-line"></div>
           <div class="f-icon-col">
             <i data-lucide="${weatherInfo.icon}" class="icon-sm" style="color: var(--accent);"></i>
-            <span class="f-speed" style="font-size: 10px; margin-top: 4px;">${weatherInfo.label}</span>
+            <span class="f-speed" style="font-size: 12px; margin-top: 4px;">${weatherInfo.label}</span>
           </div>
           <div class="f-line"></div>
           <div class="f-temp">${temp}°C</div>
