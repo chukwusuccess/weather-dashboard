@@ -27,9 +27,9 @@ body {
   display: flex;
   gap: 20px;
   width: 100%;
-  max-width: 1300px; /* Increased to fit both sections cleanly */
+  max-width: 1300px;
   padding: 40px;
-  align-items: stretch; /* Make both columns equal height */
+  align-items: stretch;
 }
 
 .main-content {
@@ -110,7 +110,7 @@ body {
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(2, 1fr);
   gap: 20px;
-  flex: 1; /* Stretch to fill available space */
+  flex: 1;
 }
 .loc-card { grid-column: 1; grid-row: 1; }
 .rain-card { grid-column: 2; grid-row: 1; }
@@ -212,7 +212,7 @@ body {
 }
 .sidebar {
   background: var(--sidebar-bg);
-  border-radius: 16px; /* Rounded normally, not glued to screen edge */
+  border-radius: 16px;
   padding: 30px 24px;
   width: 100%;
   display: flex;
@@ -231,7 +231,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  flex: 1; /* Stretch list to fill sidebar */
+  flex: 1;
   gap: 16px;
 }
 .forecast-item {
@@ -257,7 +257,34 @@ body {
   height: 10px;
 }
 
+/* Responsive Breakpoints */
 @media (max-width: 1100px) {
-  .dashboard { flex-direction: column; }
+  body { height: auto; align-items: flex-start; }
+  .dashboard { flex-direction: column; padding: 24px; }
   .sidebar-wrapper { width: 100%; }
+  
+  .bottom-section {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+  }
+  .loc-card, .rain-card, .sun-card, .uv-card, .vis-card, .wind-card {
+    grid-column: auto;
+    grid-row: auto;
+  }
+  .moon-card {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    min-height: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .top-section { grid-template-columns: 1fr; }
+  .bottom-section { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .dashboard { padding: 16px; }
+  .bottom-section { grid-template-columns: 1fr; }
+  .moon-container { margin-top: 30px; }
 }
