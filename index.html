@@ -30,7 +30,13 @@
         </button>
       </div>
 
-      <div class="top-section">
+      <!-- App Status Container (Empty / Loading / Error) -->
+      <div id="status-container" class="status-container">
+        <i id="status-icon" data-lucide="search" class="status-icon"></i>
+        <div id="status-text" class="status-text">Search for a city to see live weather data.</div>
+      </div>
+
+      <div id="weather-top" class="top-section" style="display: none;">
         <div class="card temp-card">
           <div class="temp-header">
             <h3>Outdoor</h3>
@@ -60,7 +66,7 @@
         </div>
       </div>
 
-      <div class="bottom-section">
+      <div id="weather-bottom" class="bottom-section" style="display: none;">
         <div class="card small-card loc-card">
           <div class="card-title"><i data-lucide="map-pin" class="icon-sm"></i> LOCATION DATE</div>
           <div class="loc-name" id="loc-name">NEW<br>YORK</div>
@@ -140,11 +146,11 @@
       </div>
     </div>
 
-    <div class="sidebar-wrapper">
+    <div id="sidebar-wrapper" class="sidebar-wrapper" style="display: none;">
       <div class="sidebar">
         <h2 class="sidebar-title">12 - HOUR FORCAST</h2>
         <div class="forecast-list" id="forecast-list">
-          <div style="text-align: center; color: var(--text-muted); font-size: 12px; margin-top: 20px;">Loading forecast...</div>
+          <!-- Populated by JS -->
         </div>
       </div>
     </div>

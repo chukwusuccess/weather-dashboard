@@ -1,5 +1,13 @@
 lucide.createIcons();
 
+// Elements
+const statusContainer = document.getElementById('status-container');
+const statusIcon = document.getElementById('status-icon');
+const statusText = document.getElementById('status-text');
+const weatherTop = document.getElementById('weather-top');
+const weatherBottom = document.getElementById('weather-bottom');
+const sidebarWrapper = document.getElementById('sidebar-wrapper');
+
 function updateTime() {
   const now = new Date();
   const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }).replace(':', ' : ');
@@ -29,6 +37,44 @@ function showError(message) {
   setTimeout(() => toast.classList.remove('show'), 4000);
 }
 
+// Set UI State
+function setUIState(state, message = '') {
+  if (state === 'empty') {
+    weatherTop.style.display = 'none';
+    weatherBottom.style.display = 'none';
+    sidebarWrapper.style.display = 'none';
+    statusContainer.style.display = 'flex';
+    statusIcon.setAttribute('data-lucide', 'search');
+    statusIcon.classList.remove('spin');
+    statusIcon.style.color = 'var(--accent)';
+    statusText.textContent = 'Search for a city to see live weather data.';
+  } else if (state === 'loading') {
+    weatherTop.style.display = 'none';
+    weatherBottom.style.display = 'none';
+    sidebarWrapper.style.display = 'none';
+    statusContainer.style.display = 'flex';
+    statusIcon.setAttribute('data-lucide', 'loader-2');
+    statusIcon.classList.add('spin');
+    statusIcon.style.color = 'var(--accent)';
+    statusText.textContent = 'Loading weather data...';
+  } else if (state === 'error') {
+    weatherTop.style.display = 'none';
+    weatherBottom.style.display = 'none';
+    sidebarWrapper.style.display = 'none';
+    statusContainer.style.display = 'flex';
+    statusIcon.setAttribute('data-lucide', 'cloud-off');
+    statusIcon.classList.remove('spin');
+    statusIcon.style.color = '#ff4d4d'; // Red for error
+    statusText.textContent = message || 'City not found. Try another city.';
+  } else if (state === 'success') {
+    statusContainer.style.display = 'none';
+    weatherTop.style.display = 'grid';
+    weatherBottom.style.display = 'grid';
+    sidebarWrapper.style.display = 'flex';
+  }
+  lucide.createIcons(); // re-init state icon
+}
+
 // Fetch City Coordinates
 async function getCoordinates(city) {
   const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=en&format=json`;
@@ -47,7 +93,7 @@ async function getCoordinates(city) {
     clearTimeout(timeoutId);
     
     if (!data.results || data.results.length === 0) {
-      throw new Error(`City "${city}" does not exist.`);
+      throw new Error(`City "${city}" not found. Try another city.`);
     }
     
     return data.results[0];
@@ -58,12 +104,10 @@ async function getCoordinates(city) {
 }
 
 // Fetch Weather Data
-async function fetchWeather(lat = 52.52, lon = 13.41, locationName = 'NEW\nYORK') {
-  document.getElementById('forecast-list').innerHTML = `<div style="text-align: center; color: var(--text-muted); font-size: 12px; margin-top: 20px;">Loading forecast...</div>`;
-  
+async function fetchWeather(lat, lon, locationName) {
   if (!navigator.onLine) {
-    showError("Internet is offline. Cannot fetch data.");
-    document.getElementById('forecast-list').innerHTML = `<div style="text-align: center; color: #ff4d4d; font-size: 12px; margin-top: 20px;">Offline mode</div>`;
+    showError("Internet is offline.");
+    setUIState('error', 'Internet is offline. Cannot fetch data.');
     return;
   }
 
@@ -147,18 +191,16 @@ async function fetchWeather(lat = 52.52, lon = 13.41, locationName = 'NEW\nYORK'
         </div>
       `;
     }
-    lucide.createIcons();
+    
+    setUIState('success');
     
   } catch (error) {
     console.error("Fetch Error:", error);
-    if (error.name === 'AbortError') showError("Request took too long. Please try again.");
-    else showError(error.message);
+    let errorMsg = error.message;
+    if (error.name === 'AbortError') errorMsg = "Request took too long. Check your internet connection.";
     
-    document.getElementById('forecast-list').innerHTML = `
-      <div style="text-align: center; color: #ff4d4d; font-size: 12px; margin-top: 20px;">
-        Failed to load data.
-      </div>
-    `;
+    showError(errorMsg);
+    setUIState('error', errorMsg);
   }
 }
 
@@ -178,17 +220,20 @@ async function handleSearch() {
   
   if (!navigator.onLine) {
     showError("Internet is offline.");
+    setUIState('error', 'Internet is offline. Cannot fetch data.');
     return;
   }
   
+  setUIState('loading');
+  
   try {
     const geoData = await getCoordinates(city);
-    // Success: fetch weather for new coordinates
-    fetchWeather(geoData.latitude, geoData.longitude, geoData.name);
+    await fetchWeather(geoData.latitude, geoData.longitude, geoData.name);
   } catch (error) {
     showError(error.message);
+    setUIState('error', error.message);
   }
 }
 
-// Init default fetch (New York roughly)
-fetchWeather(40.71, -74.00, 'NEW\nYORK');
+// Initialize empty state instead of auto-fetching
+setUIState('empty');
