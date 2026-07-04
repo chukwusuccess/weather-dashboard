@@ -8,6 +8,23 @@ function updateTime() {
 setInterval(updateTime, 1000);
 updateTime();
 
+// Theme Toggle Logic
+const themeBtn = document.getElementById('theme-toggle');
+const themeIcon = document.getElementById('theme-icon');
+
+themeBtn.addEventListener('click', () => {
+  document.body.classList.toggle('light-mode');
+  if (document.body.classList.contains('light-mode')) {
+    themeIcon.setAttribute('data-lucide', 'moon');
+  } else {
+    themeIcon.setAttribute('data-lucide', 'sun');
+  }
+  // Re-initialize only the theme icon
+  lucide.createIcons({
+    nameAttr: 'data-lucide'
+  });
+});
+
 const forecastData = [
   { time: '4:00', icon: 'cloud-rain', speed: '15km/h', temp: '20°' },
   { time: '5:00', icon: 'cloud-drizzle', speed: '15km/h', temp: '20°' },
@@ -30,7 +47,7 @@ forecastData.forEach(f => {
       <div class="f-time">${f.time}</div>
       <div class="f-line"></div>
       <div class="f-icon-col">
-        <i data-lucide="${f.icon}" class="icon-sm" style="color: #5ce5d5;"></i>
+        <i data-lucide="${f.icon}" class="icon-sm" style="color: var(--accent);"></i>
         <span class="f-speed">${f.speed}</span>
       </div>
       <div class="f-line"></div>

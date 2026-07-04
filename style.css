@@ -1,10 +1,33 @@
 :root {
+  /* Dark Mode (Default) */
   --bg-gradient: linear-gradient(135deg, #30585f 0%, #202428 60%, #1a1c1e 100%);
   --card-bg: #222529;
   --sidebar-bg: #15171a;
   --text-main: #ffffff;
   --text-muted: #838a90;
   --accent: #5ce5d5;
+  --border-subtle: rgba(255,255,255,0.2);
+  --moon-dark: #111315;
+  --moon-light: #ffffff;
+  --moon-glow: rgba(92, 229, 213, 0.4);
+  --card-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  --time-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+body.light-mode {
+  /* Light Mode */
+  --bg-gradient: linear-gradient(135deg, #d8ecea 0%, #f4f6f8 60%, #ffffff 100%);
+  --card-bg: #ffffff;
+  --sidebar-bg: #f8fafc;
+  --text-main: #1a1c1e;
+  --text-muted: #64748b;
+  --accent: #009988;
+  --border-subtle: rgba(0,0,0,0.1);
+  --moon-dark: #f1f5f9;
+  --moon-light: #1e293b;
+  --moon-glow: rgba(0, 153, 136, 0.2);
+  --card-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  --time-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
 * {
@@ -21,6 +44,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .dashboard {
@@ -39,6 +63,13 @@ body {
   gap: 20px;
 }
 
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 /* Time Pill */
 .time-pill {
   background: var(--card-bg);
@@ -49,7 +80,17 @@ body {
   gap: 8px;
   font-size: 14px;
   font-weight: 500;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: var(--time-shadow);
+  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  color: var(--text-main);
+}
+.theme-btn {
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+.theme-btn:hover {
+  opacity: 0.8;
 }
 .accent { color: var(--accent); }
 .icon-sm { width: 12px; height: 12px; color: var(--text-muted); }
@@ -61,7 +102,8 @@ body {
   padding: 18px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  box-shadow: var(--card-shadow);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 .card-title {
   display: flex;
@@ -139,7 +181,7 @@ body {
 .uv-dot {
   position: absolute;
   width: 8px; height: 8px;
-  background: white;
+  background: var(--text-main);
   border-radius: 50%;
   top: -2px; left: 30%;
 }
@@ -150,7 +192,7 @@ body {
   width: 70%;
   aspect-ratio: 1;
   margin: 0 auto;
-  border: 1px dashed rgba(255,255,255,0.2);
+  border: 1px dashed var(--border-subtle);
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -160,7 +202,7 @@ body {
 .compass-val { display: block; font-size: 14px; font-weight: 600; }
 .compass-unit { font-size: 8px; color: var(--text-muted); }
 .compass-marker { position: absolute; font-size: 8px; font-weight: bold; color: var(--text-muted); }
-.compass-marker.n { top: -6px; color: white; }
+.compass-marker.n { top: -6px; color: var(--text-main); }
 .compass-marker.s { bottom: -6px; }
 .compass-marker.e { right: -6px; }
 .compass-marker.w { left: -6px; }
@@ -183,20 +225,21 @@ body {
   position: absolute;
   width: 28px; height: 28px;
   border-radius: 50%;
-  background: #111315;
-  box-shadow: inset -4px 0 0 white;
+  background: var(--moon-dark);
+  box-shadow: inset -4px 0 0 var(--moon-light);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 .moon.active {
   width: 60px; height: 60px;
-  background: white;
-  box-shadow: 0 0 20px rgba(92, 229, 213, 0.4);
+  background: var(--moon-light);
+  box-shadow: 0 0 20px var(--moon-glow);
   left: 50%; top: 20px;
   transform: translateX(-50%);
 }
-.m1 { left: 10%; bottom: 10%; box-shadow: none; border: 1px solid rgba(255,255,255,0.1); }
-.m2 { left: 25%; top: 40%; box-shadow: inset -6px 0 0 white; }
-.m4 { right: 25%; top: 40%; box-shadow: inset 6px 0 0 white; }
-.m5 { right: 10%; bottom: 10%; box-shadow: inset 12px 0 0 white; background: white; }
+.m1 { left: 10%; bottom: 10%; box-shadow: none; border: 1px solid var(--border-subtle); }
+.m2 { left: 25%; top: 40%; box-shadow: inset -6px 0 0 var(--moon-light); }
+.m4 { right: 25%; top: 40%; box-shadow: inset 6px 0 0 var(--moon-light); }
+.m5 { right: 10%; bottom: 10%; box-shadow: inset 12px 0 0 var(--moon-light); background: var(--moon-light); }
 .moon-label {
   color: var(--accent);
   font-size: 11px;
@@ -217,7 +260,8 @@ body {
   width: 100%;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  box-shadow: var(--card-shadow);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 .sidebar-title {
   color: var(--accent);
@@ -252,7 +296,7 @@ body {
 .f-temp { width: 25px; text-align: right; }
 .f-line {
   flex: 1;
-  border-bottom: 1px dotted rgba(255,255,255,0.2);
+  border-bottom: 1px dotted var(--border-subtle);
   margin: 0 10px;
   height: 10px;
 }
