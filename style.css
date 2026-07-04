@@ -472,3 +472,41 @@ body {
 @keyframes spin {
   100% { transform: rotate(360deg); }
 }
+
+/* Suggestions Dropdown */
+.suggestions-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 250px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
+  margin-top: 8px;
+  z-index: 100;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+  flex-direction: column;
+  border: 1px solid var(--border-subtle);
+}
+.suggestion-item {
+  padding: 10px 16px;
+  cursor: pointer;
+  color: var(--text-main);
+  font-size: 13px;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+.suggestion-item:hover {
+  background: rgba(150, 150, 150, 0.1);
+}
+.suggestion-country {
+  font-size: 10px;
+  color: var(--text-muted);
+}

@@ -237,3 +237,57 @@ async function handleSearch() {
 
 // Initialize empty state instead of auto-fetching
 setUIState('empty');
+
+// Autocomplete Logic
+const cityInput = document.getElementById('city-input');
+const suggestionsDropdown = document.getElementById('search-suggestions');
+let debounceTimer;
+
+cityInput.addEventListener('input', (e) => {
+  clearTimeout(debounceTimer);
+  const query = e.target.value.trim();
+  if (query.length < 2) {
+    suggestionsDropdown.style.display = 'none';
+    return;
+  }
+  debounceTimer = setTimeout(() => fetchSuggestions(query), 300);
+});
+
+async function fetchSuggestions(query) {
+  if (!navigator.onLine) return;
+  try {
+    const res = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=5&language=en&format=json`);
+    if (!res.ok) return;
+    const data = await res.json();
+    if (data.results && data.results.length > 0) {
+      showSuggestions(data.results);
+    } else {
+      suggestionsDropdown.style.display = 'none';
+    }
+  } catch (e) {
+    console.error("Suggestion fetch failed", e);
+  }
+}
+
+function showSuggestions(results) {
+  suggestionsDropdown.innerHTML = '';
+  results.forEach(res => {
+    const div = document.createElement('div');
+    div.className = 'suggestion-item';
+    const region = res.admin1 ? `${res.admin1}, ` : '';
+    div.innerHTML = `<span>${res.name}</span><span class="suggestion-country">${region}${res.country}</span>`;
+    div.addEventListener('click', () => {
+      cityInput.value = res.name;
+      suggestionsDropdown.style.display = 'none';
+      handleSearch();
+    });
+    suggestionsDropdown.appendChild(div);
+  });
+  suggestionsDropdown.style.display = 'flex';
+}
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.search-container')) {
+    suggestionsDropdown.style.display = 'none';
+  }
+});

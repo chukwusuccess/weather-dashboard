@@ -18,11 +18,12 @@
           <span id="current-time">04 : 32 PM</span>
         </div>
         
-        <div class="search-container">
+        <div class="search-container" style="position: relative;">
           <input type="text" id="city-input" placeholder="Search city..." autocomplete="off">
           <button id="search-btn" aria-label="Search">
             <i data-lucide="search" class="icon-sm accent"></i>
           </button>
+          <div id="search-suggestions" class="suggestions-dropdown"></div>
         </div>
 
         <button id="theme-toggle" class="time-pill theme-btn" aria-label="Toggle theme">
