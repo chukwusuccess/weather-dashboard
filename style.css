@@ -215,46 +215,44 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
+  width: 100%;
 }
 .moon-arc {
   width: 100%;
-  height: 160px; /* Increased height to spread them vertically */
+  max-width: 320px;
+  height: 160px;
   position: relative;
   margin-top: 10px;
 }
 .moon {
   position: absolute;
-  width: 36px; /* Increased from 28px */
+  width: 36px;
   height: 36px;
   border-radius: 50%;
   background: var(--moon-dark);
-  box-shadow: inset -5px 0 0 var(--moon-light); /* Adjusted for size */
+  box-shadow: inset -5px 0 0 var(--moon-light);
   transition: background 0.3s ease, box-shadow 0.3s ease;
+  transform: translateX(-50%); /* Centers the moon perfectly on its 'left' value */
 }
 .moon.active {
-  width: 76px; /* Increased from 60px */
+  width: 76px;
   height: 76px;
   background: var(--moon-light);
-  /* The active moon in the design is a First Quarter / Half Moon.
-     Half is light, half is dark. Let's make it look like a quarter moon (half illuminated) */
   box-shadow: inset 38px 0 0 var(--moon-dark), 0 0 20px var(--moon-glow);
-  left: 50%; top: 15px; /* Pushed up slightly to spread the arc */
-  transform: translateX(-50%);
+  left: 50%; top: 5px;
 }
-/* New Moon */
-.m1 { left: 2%; bottom: 5%; box-shadow: none; border: 1px solid var(--border-subtle); }
-/* Waxing Crescent */
-.m2 { left: 18%; top: 35%; box-shadow: inset -8px 0 0 var(--moon-light); }
-/* Waxing Gibbous */
-.m4 { right: 18%; top: 35%; box-shadow: inset 8px 0 0 var(--moon-light); }
-/* Full Moon */
-.m5 { right: 2%; bottom: 5%; box-shadow: inset 18px 0 0 var(--moon-light); background: var(--moon-light); }
+/* By using left percentages with translateX(-50%), they spread evenly across the arc */
+.m1 { left: 5%; bottom: 15%; box-shadow: none; border: 1px solid var(--border-subtle); }
+.m2 { left: 25%; top: 45%; box-shadow: inset -8px 0 0 var(--moon-light); }
+.m4 { left: 75%; top: 45%; box-shadow: inset 8px 0 0 var(--moon-light); }
+.m5 { left: 95%; bottom: 15%; box-shadow: inset 18px 0 0 var(--moon-light); background: var(--moon-light); }
+
 .moon-label {
   color: var(--accent);
   font-size: 11px;
   letter-spacing: 2px;
   font-weight: 500;
-  margin-top: 15px; /* Spaced out slightly from the arc */
+  margin-top: 15px;
 }
 
 /* Sidebar */
