@@ -111,7 +111,7 @@ async function fetchWeather(lat, lon, locationName) {
     return;
   }
 
-  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_min,temperature_2m_max,sunset,sunrise,rain_sum,showers_sum,snowfall_sum,uv_index_max&hourly=temperature_2m,relative_humidity_2m,rain,wind_speed_10m&current=temperature_2m,relative_humidity_2m,wind_speed_10m&timezone=auto`;
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_min,temperature_2m_max,sunset,sunrise,rain_sum,showers_sum,snowfall_sum,uv_index_max,weather_code&hourly=temperature_2m,relative_humidity_2m,rain,wind_speed_10m&current=temperature_2m,relative_humidity_2m,wind_speed_10m&timezone=auto`;
   
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 8000);
@@ -159,38 +159,60 @@ async function fetchWeather(lat, lon, locationName) {
     document.getElementById('sunrise-val').textContent = formatTime(daily.sunrise[0]);
     document.getElementById('sunset-val').textContent = `SUNSET ${formatTime(daily.sunset[0])}`;
     
-    const currentHourIndex = data.hourly.time.findIndex(t => new Date(t) >= new Date());
-    const startIndex = currentHourIndex > -1 ? currentHourIndex : 0;
     const list = document.getElementById('forecast-list');
     list.innerHTML = ''; 
     
-    for (let i = 0; i < 12; i++) {
-      const idx = startIndex + i;
-      if (idx >= data.hourly.time.length) break;
+    // WMO Weather interpretation codes
+    const wmoMap = {
+      0: { label: 'Clear', icon: 'sun' },
+      1: { label: 'Mostly Clear', icon: 'cloud-sun' },
+      2: { label: 'Partly Cloudy', icon: 'cloud-sun' },
+      3: { label: 'Cloudy', icon: 'cloud' },
+      45: { label: 'Fog', icon: 'cloud-fog' },
+      48: { label: 'Fog', icon: 'cloud-fog' },
+      51: { label: 'Drizzle', icon: 'cloud-drizzle' },
+      53: { label: 'Drizzle', icon: 'cloud-drizzle' },
+      55: { label: 'Drizzle', icon: 'cloud-drizzle' },
+      61: { label: 'Rain', icon: 'cloud-rain' },
+      63: { label: 'Rain', icon: 'cloud-rain' },
+      65: { label: 'Heavy Rain', icon: 'cloud-rain' },
+      71: { label: 'Snow', icon: 'snowflake' },
+      73: { label: 'Snow', icon: 'snowflake' },
+      75: { label: 'Heavy Snow', icon: 'snowflake' },
+      80: { label: 'Showers', icon: 'cloud-rain' },
+      81: { label: 'Showers', icon: 'cloud-rain' },
+      82: { label: 'Heavy Showers', icon: 'cloud-rain' },
+      95: { label: 'Storm', icon: 'cloud-lightning' },
+      96: { label: 'Storm', icon: 'cloud-lightning' },
+      99: { label: 'Heavy Storm', icon: 'cloud-lightning' }
+    };
+    
+    for (let i = 0; i < 7; i++) {
+      if (i >= data.daily.time.length) break;
       
-      const hourTime = new Date(data.hourly.time[idx]);
-      const formattedHour = hourTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: false });
-      const temp = Math.round(data.hourly.temperature_2m[idx]);
-      const rain = data.hourly.rain[idx];
+      const dayStr = data.daily.time[i];
+      const dayDate = new Date(dayStr + 'T00:00:00'); 
+      const isToday = i === 0;
+      const dayName = isToday ? 'Today' : dayDate.toLocaleDateString('en-US', { weekday: 'short' });
       
-      let icon = 'cloud';
-      if (rain > 0) icon = 'cloud-rain';
-      else if (temp > 25 && hourTime.getHours() > 6 && hourTime.getHours() < 18) icon = 'sun';
-      else if (hourTime.getHours() <= 6 || hourTime.getHours() >= 18) icon = 'moon';
+      const temp = Math.round(data.daily.temperature_2m_max[i]);
+      const code = data.daily.weather_code[i];
+      const weatherInfo = wmoMap[code] || { label: 'Cloudy', icon: 'cloud' };
       
       list.innerHTML += `
         <div class="forecast-item">
-          <div class="f-time">${formattedHour}</div>
+          <div class="f-time">${dayName}</div>
           <div class="f-line"></div>
           <div class="f-icon-col">
-            <i data-lucide="${icon}" class="icon-sm" style="color: var(--accent);"></i>
-            <span class="f-speed">${Math.round(data.hourly.wind_speed_10m[idx])}km/h</span>
+            <i data-lucide="${weatherInfo.icon}" class="icon-sm" style="color: var(--accent);"></i>
+            <span class="f-speed" style="font-size: 10px; margin-top: 4px;">${weatherInfo.label}</span>
           </div>
           <div class="f-line"></div>
-          <div class="f-temp">${temp}°</div>
+          <div class="f-temp">${temp}°C</div>
         </div>
       `;
     }
+    lucide.createIcons();
     
     setUIState('success');
     
