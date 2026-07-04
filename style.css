@@ -73,15 +73,18 @@ body {
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
   gap: 12px;
+  height: 48px; /* Force exactly equal height across all 3 */
 }
 
 /* Time Pill */
 .time-pill {
   background: var(--card-bg);
-  padding: 8px 16px;
-  border-radius: 20px;
+  padding: 0 16px;
+  border-radius: 24px;
+  height: 100%;
+  box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -96,7 +99,12 @@ body {
   cursor: pointer;
   border: none;
   outline: none;
-  padding: 10px;
+  padding: 0;
+  width: 48px; /* Force perfect circle matching height */
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .theme-btn:hover {
   opacity: 0.8;
@@ -389,8 +397,10 @@ body {
   display: flex;
   align-items: center;
   background: var(--card-bg);
-  border-radius: 20px;
-  padding: 8px 16px;
+  border-radius: 24px;
+  padding: 0 16px;
+  height: 100%;
+  box-sizing: border-box;
   box-shadow: var(--time-shadow);
   transition: all 0.3s ease;
   border: 1px solid transparent;
@@ -547,9 +557,9 @@ body.light-mode .suggestion-item:hover {
 }
 
 @media (max-width: 600px) {
-  .header { gap: 8px; }
-  .time-pill { padding: 6px 10px; font-size: 12px; }
-  .search-container { padding: 6px 10px; }
+  .header { gap: 8px; height: 40px; }
+  .time-pill { padding: 0 12px; font-size: 12px; }
+  .search-container { padding: 0 12px; }
   .search-container input { font-size: 12px; }
-  .theme-btn { padding: 8px; }
+  .theme-btn { width: 40px; }
 }
