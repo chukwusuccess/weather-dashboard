@@ -8,6 +8,17 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
+  <!-- Decorative background clouds -->
+  <div class="bg-clouds">
+    <svg width="400" height="200" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M100 120a40 40 0 0 1-40-40 40 40 0 0 1 75-19 50 50 0 0 1 95 10 30 30 0 0 1 30 30 30 30 0 0 1-30 30z" fill="#49c6c9" opacity="0.8"/>
+      <circle cx="80" cy="70" r="30" fill="#e0e0e0" opacity="0.9"/>
+    </svg>
+    <svg width="300" height="150" viewBox="0 0 300 150" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left:-100px; margin-top:20px;">
+      <path d="M50 100a30 30 0 0 1-30-30 30 30 0 0 1 55-15 40 40 0 0 1 75 5 25 25 0 0 1 25 25 25 25 0 0 1-25 25z" fill="#49c6c9" opacity="0.6"/>
+    </svg>
+  </div>
+
   <div class="dashboard">
     <div class="main-content">
       <div class="header">
@@ -17,7 +28,7 @@
         </div>
       </div>
 
-      <div class="temps-grid">
+      <div class="top-section">
         <div class="card temp-card">
           <div class="temp-header">
             <h3>Outdoor</h3>
@@ -47,18 +58,18 @@
         </div>
       </div>
 
-      <div class="bottom-grid">
+      <div class="bottom-section">
         <div class="card small-card">
           <div class="card-title"><i data-lucide="map-pin" class="icon-sm"></i> LOCATION DATE</div>
           <div class="loc-name">NEW<br>YORK</div>
-          <div class="loc-date">SUNDAY<br>12 DEC, 2024</div>
+          <div class="metric-foot">SUNDAY<br>12 DEC, 2024</div>
         </div>
 
         <div class="card small-card">
-          <div class="card-title"><i data-lucide="cloud-rain" class="icon-sm"></i> RAINFALL</div>
+          <div class="card-title"><i data-lucide="droplets" class="icon-sm"></i> RAINFALL</div>
           <div class="metric-val">1.88mm</div>
           <div class="metric-sub">In last hour</div>
-          <div class="metric-foot">1.2mm expected in next hours</div>
+          <div class="metric-foot mt-auto">1.2mm expected in<br>next hours</div>
         </div>
 
         <div class="card small-card">
@@ -71,35 +82,6 @@
             </svg>
           </div>
           <div class="metric-foot">SUNSET 7:30 PM</div>
-        </div>
-
-        <div class="card small-card">
-          <div class="card-title"><i data-lucide="sun" class="icon-sm"></i> UV INDEX</div>
-          <div class="metric-val">4</div>
-          <div class="metric-sub">Moderate</div>
-          <div class="uv-bar">
-            <div class="uv-dot"></div>
-          </div>
-        </div>
-
-        <div class="card small-card">
-          <div class="card-title"><i data-lucide="eye" class="icon-sm"></i> VISIBILITY</div>
-          <div class="metric-val">8 km</div>
-          <div class="metric-foot mt-auto">Similar to the actual temperature.</div>
-        </div>
-
-        <div class="card small-card">
-          <div class="card-title"><i data-lucide="wind" class="icon-sm"></i> WIND</div>
-          <div class="compass">
-            <div class="compass-center">
-              <span class="compass-val">9.7</span>
-              <span class="compass-unit">km/h</span>
-            </div>
-            <div class="compass-marker n">N</div>
-            <div class="compass-marker e">E</div>
-            <div class="compass-marker s">S</div>
-            <div class="compass-marker w">W</div>
-          </div>
         </div>
 
         <div class="card moon-card">
@@ -115,13 +97,49 @@
              <div class="moon-label">QUATER MOON</div>
           </div>
         </div>
+
+        <div class="card small-card">
+          <div class="card-title"><i data-lucide="sun" class="icon-sm"></i> UV INDEX</div>
+          <div class="metric-val">4</div>
+          <div class="metric-sub">Moderate</div>
+          <div class="uv-bar mt-auto">
+            <div class="uv-dot"></div>
+          </div>
+        </div>
+
+        <div class="card small-card">
+          <div class="card-title"><i data-lucide="eye" class="icon-sm"></i> VISIBILITY</div>
+          <div class="metric-val">8 km</div>
+          <div class="metric-foot mt-auto">Similar to the actual<br>temperature.</div>
+        </div>
+
+        <div class="card small-card">
+          <div class="card-title"><i data-lucide="wind" class="icon-sm"></i> WIND</div>
+          <div class="compass mt-auto">
+            <div class="compass-center">
+              <span class="compass-val">9.7</span>
+              <span class="compass-unit">km/h</span>
+            </div>
+            <div class="compass-marker n">N</div>
+            <div class="compass-marker e">E</div>
+            <div class="compass-marker s">S</div>
+            <div class="compass-marker w">W</div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="sidebar">
-      <h2 class="sidebar-title">12 - HOUR FORCAST</h2>
-      <div class="forecast-list" id="forecast-list">
-        <!-- Populated by JS to keep HTML DRY -->
+    <div class="sidebar-wrapper">
+      <div class="sidebar-clouds">
+         <svg width="250" height="100" viewBox="0 0 250 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M40 80a30 30 0 0 1-30-30 30 30 0 0 1 50-20 40 40 0 0 1 75-5 30 30 0 0 1 45 10 25 25 0 0 1 25 25 25 25 0 0 1-25 25z" fill="#f0f0f0"/>
+         </svg>
+      </div>
+      <div class="sidebar">
+        <h2 class="sidebar-title">12 - HOUR FORCAST</h2>
+        <div class="forecast-list" id="forecast-list">
+          <!-- Populated by JS -->
+        </div>
       </div>
     </div>
   </div>
