@@ -8,6 +8,8 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
+  <div id="error-toast" class="error-toast"></div>
+
   <div class="dashboard">
     <div class="main-content">
       <div class="header">
@@ -15,6 +17,14 @@
           <i data-lucide="clock" class="icon-sm accent"></i>
           <span id="current-time">04 : 32 PM</span>
         </div>
+        
+        <div class="search-container">
+          <input type="text" id="city-input" placeholder="Search city..." autocomplete="off">
+          <button id="search-btn" aria-label="Search">
+            <i data-lucide="search" class="icon-sm accent"></i>
+          </button>
+        </div>
+
         <button id="theme-toggle" class="time-pill theme-btn" aria-label="Toggle theme">
           <i data-lucide="sun" class="icon-sm accent" id="theme-icon"></i>
         </button>
@@ -53,7 +63,7 @@
       <div class="bottom-section">
         <div class="card small-card loc-card">
           <div class="card-title"><i data-lucide="map-pin" class="icon-sm"></i> LOCATION DATE</div>
-          <div class="loc-name">NEW<br>YORK</div>
+          <div class="loc-name" id="loc-name">NEW<br>YORK</div>
           <div class="metric-foot" id="loc-date">SUNDAY<br>12 DEC, 2024</div>
         </div>
 
@@ -80,43 +90,22 @@
           <div class="card-title"><i data-lucide="moon" class="icon-sm"></i> MOON PHASE</div>
           <div class="moon-container">
              <div class="moon-arc">
-                <!-- Moon 1: New Moon (mostly dark, very thin left border) -->
-                <div class="moon m1">
-                  <div class="crater c1"></div><div class="crater c2"></div><div class="crater c3"></div>
-                </div>
-                <!-- Moon 2: Waxing Crescent -->
+                <div class="moon m1"><div class="crater c1"></div><div class="crater c2"></div><div class="crater c3"></div></div>
                 <div class="moon m2">
-                  <div class="light-side">
-                    <div class="crater c1"></div><div class="crater c2"></div><div class="crater c3"></div>
-                  </div>
-                  <div class="dark-shadow">
-                    <div class="crater c1"></div><div class="crater c2"></div><div class="crater c3"></div>
-                  </div>
+                  <div class="light-side"><div class="crater c1"></div><div class="crater c2"></div><div class="crater c3"></div></div>
+                  <div class="dark-shadow"><div class="crater c1"></div><div class="crater c2"></div><div class="crater c3"></div></div>
                 </div>
-                <!-- Moon 3: Quarter Moon (Active) -->
                 <div class="moon m3 active">
-                  <div class="light-side">
-                    <div class="crater c1"></div><div class="crater c2"></div><div class="crater c3"></div>
-                  </div>
-                  <div class="dark-shadow">
-                    <div class="crater c1"></div><div class="crater c2"></div><div class="crater c3"></div>
-                  </div>
+                  <div class="light-side"><div class="crater c1"></div><div class="crater c2"></div><div class="crater c3"></div></div>
+                  <div class="dark-shadow"><div class="crater c1"></div><div class="crater c2"></div><div class="crater c3"></div></div>
                 </div>
-                <!-- Moon 4: Waxing Gibbous -->
                 <div class="moon m4">
-                  <div class="light-side">
-                    <div class="crater c1"></div><div class="crater c2"></div><div class="crater c3"></div>
-                  </div>
-                  <div class="dark-shadow">
-                    <div class="crater c1"></div><div class="crater c2"></div><div class="crater c3"></div>
-                  </div>
+                  <div class="light-side"><div class="crater c1"></div><div class="crater c2"></div><div class="crater c3"></div></div>
+                  <div class="dark-shadow"><div class="crater c1"></div><div class="crater c2"></div><div class="crater c3"></div></div>
                 </div>
-                <!-- Moon 5: Full Moon -->
-                <div class="moon m5">
-                  <div class="crater c1"></div><div class="crater c2"></div><div class="crater c3"></div>
-                </div>
+                <div class="moon m5"><div class="crater c1"></div><div class="crater c2"></div><div class="crater c3"></div></div>
              </div>
-             <div class="moon-label">QUATER MOON</div>
+             <div class="moon-label">QUARTER MOON</div>
           </div>
         </div>
 
@@ -155,7 +144,6 @@
       <div class="sidebar">
         <h2 class="sidebar-title">12 - HOUR FORCAST</h2>
         <div class="forecast-list" id="forecast-list">
-          <!-- Populated by JS -->
           <div style="text-align: center; color: var(--text-muted); font-size: 12px; margin-top: 20px;">Loading forecast...</div>
         </div>
       </div>
