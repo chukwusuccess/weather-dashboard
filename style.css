@@ -478,35 +478,65 @@ body {
   position: absolute;
   top: 100%;
   left: 0;
-  width: 250px;
+  width: 260px;
+  /* Use card-bg but slightly transparent for blur effect */
   background: var(--card-bg);
-  border-radius: 12px;
-  box-shadow: var(--card-shadow);
-  margin-top: 8px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  margin-top: 12px;
   z-index: 100;
-  max-height: 200px;
+  max-height: 220px;
   overflow-y: auto;
   display: none;
   flex-direction: column;
   border: 1px solid var(--border-subtle);
+  padding: 8px 0;
 }
+body.light-mode .suggestions-dropdown {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Minimalist Scrollbar */
+.suggestions-dropdown::-webkit-scrollbar {
+  width: 4px;
+}
+.suggestions-dropdown::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 8px 0;
+}
+.suggestions-dropdown::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 10px;
+}
+.suggestions-dropdown::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Suggestion Items */
 .suggestion-item {
-  padding: 10px 16px;
+  padding: 10px 20px;
   cursor: pointer;
   color: var(--text-main);
   font-size: 13px;
-  border-bottom: 1px solid var(--border-subtle);
+  font-weight: 500;
   display: flex;
   flex-direction: column;
-  gap: 2px;
-}
-.suggestion-item:last-child {
-  border-bottom: none;
+  gap: 3px;
+  transition: background 0.2s ease, padding-left 0.2s ease;
 }
 .suggestion-item:hover {
-  background: rgba(150, 150, 150, 0.1);
+  background: rgba(92, 229, 213, 0.1);
+  padding-left: 24px; /* Sleek indent effect on hover */
+}
+body.light-mode .suggestion-item:hover {
+  background: rgba(0, 153, 136, 0.08);
 }
 .suggestion-country {
-  font-size: 10px;
+  font-size: 9px;
   color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 400;
 }
