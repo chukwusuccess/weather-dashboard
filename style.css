@@ -232,20 +232,20 @@ body {
   background: var(--moon-dark);
   box-shadow: inset -5px 0 0 var(--moon-light);
   transition: background 0.3s ease, box-shadow 0.3s ease;
-  transform: translateX(-50%); /* Centers the moon perfectly on its 'left' value */
+  transform: translate(-50%, -50%); /* Centers the moon perfectly on its exact X/Y coordinates */
 }
 .moon.active {
   width: 76px;
   height: 76px;
   background: var(--moon-light);
   box-shadow: inset 38px 0 0 var(--moon-dark), 0 0 20px var(--moon-glow);
-  left: 50%; top: 5px;
 }
-/* By using left percentages with translateX(-50%), they spread evenly across the arc */
-.m1 { left: 5%; bottom: 15%; box-shadow: none; border: 1px solid var(--border-subtle); }
-.m2 { left: 25%; top: 45%; box-shadow: inset -8px 0 0 var(--moon-light); }
-.m4 { left: 75%; top: 45%; box-shadow: inset 8px 0 0 var(--moon-light); }
-.m5 { left: 95%; bottom: 15%; box-shadow: inset 18px 0 0 var(--moon-light); background: var(--moon-light); }
+/* Plotting the perfect arc with exact coordinates */
+.m1 { left: 10%; top: 130px; box-shadow: none; border: 1px solid var(--border-subtle); }
+.m2 { left: 30%; top: 80px; box-shadow: inset -8px 0 0 var(--moon-light); }
+.m3.active { left: 50%; top: 40px; }
+.m4 { left: 70%; top: 80px; box-shadow: inset 8px 0 0 var(--moon-light); }
+.m5 { left: 90%; top: 130px; box-shadow: inset 18px 0 0 var(--moon-light); background: var(--moon-light); }
 
 .moon-label {
   color: var(--accent);
