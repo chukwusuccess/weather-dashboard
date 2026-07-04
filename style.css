@@ -559,7 +559,13 @@ body.light-mode .suggestion-item:hover {
 @media (max-width: 600px) {
   .header { gap: 8px; height: 40px; }
   .time-pill { padding: 0 12px; font-size: 12px; }
-  .search-container { padding: 0 12px; }
+  .search-container { padding: 0 12px 0 16px; }
   .search-container input { font-size: 12px; }
   .theme-btn { width: 40px; }
+}
+
+/* Target the search icon specifically to make it larger */
+#search-btn .icon-sm {
+  width: 18px;
+  height: 18px;
 }

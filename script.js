@@ -228,6 +228,8 @@ async function fetchWeather(lat, lon, locationName) {
 
 // Search Logic
 document.getElementById('search-btn').addEventListener('click', handleSearch);
+// Make full bar click focus the input
+document.querySelector('.search-container').addEventListener('click', () => document.getElementById('city-input').focus());
 document.getElementById('city-input').addEventListener('keypress', (e) => {
   if (e.key === 'Enter') handleSearch();
 });
