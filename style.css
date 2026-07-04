@@ -1,0 +1,250 @@
+:root {
+  --bg-gradient: linear-gradient(135deg, #375357 0%, #202428 100%);
+  --card-bg: #1c1e22;
+  --card-bg-light: #24272c;
+  --text-main: #ffffff;
+  --text-muted: #8a929a;
+  --accent: #5ce5d5;
+  --accent-glow: rgba(92, 229, 213, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background: var(--bg-gradient);
+  color: var(--text-main);
+  min-height: 100vh;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 32px;
+  width: 100%;
+  max-width: 1400px;
+  background: transparent;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Time Pill */
+.time-pill {
+  background: var(--card-bg);
+  padding: 10px 20px;
+  border-radius: 30px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.accent { color: var(--accent); }
+.icon-sm { width: 16px; height: 16px; color: var(--text-muted); }
+
+/* Cards */
+.card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+}
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+/* Temps */
+.temps-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.temp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.temp-header h3 { font-size: 18px; font-weight: 500; color: var(--text-muted); }
+.humidity { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-muted); }
+.temp-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.temp-value {
+  font-size: 72px;
+  font-weight: 300;
+  color: var(--accent);
+  line-height: 1;
+}
+.temp-value span { font-size: 32px; vertical-align: super; }
+.temp-details { text-align: right; }
+.humidity-val { font-size: 32px; font-weight: 400; line-height: 1.2; }
+.dew-point { font-size: 12px; color: var(--text-muted); }
+
+/* Bottom Grid */
+.bottom-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) 1.5fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 24px;
+}
+.moon-card {
+  grid-column: 4;
+  grid-row: 1 / 3;
+}
+
+/* Small Cards Typography */
+.small-card { padding: 20px; }
+.loc-name { font-size: 24px; font-weight: 500; line-height: 1.2; margin-bottom: 12px; }
+.loc-date { font-size: 11px; color: var(--text-muted); text-transform: uppercase; line-height: 1.4; }
+
+.metric-val { font-size: 24px; font-weight: 500; margin-bottom: 4px; }
+.metric-sub { font-size: 13px; color: var(--text-muted); }
+.metric-foot { font-size: 11px; color: var(--text-muted); margin-top: auto; }
+.mt-auto { margin-top: auto; padding-top: 16px; }
+
+/* Custom elements */
+.sine-wave { margin: 16px 0; }
+.uv-bar {
+  margin-top: auto;
+  height: 4px;
+  background: linear-gradient(90deg, #5ce5d5, #b15ce5);
+  border-radius: 2px;
+  position: relative;
+}
+.uv-dot {
+  position: absolute;
+  width: 8px; height: 8px;
+  background: white;
+  border-radius: 50%;
+  top: -2px; left: 30%;
+  box-shadow: 0 0 4px rgba(0,0,0,0.5);
+}
+
+.compass {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border: 2px dashed rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+.compass-center { text-align: center; }
+.compass-val { display: block; font-size: 20px; font-weight: 600; }
+.compass-unit { font-size: 10px; color: var(--text-muted); }
+.compass-marker { position: absolute; font-size: 10px; font-weight: bold; color: var(--text-muted); }
+.compass-marker.n { top: -10px; color: white; }
+.compass-marker.s { bottom: -10px; }
+.compass-marker.e { right: -10px; }
+.compass-marker.w { left: -10px; }
+
+/* Moon Phase */
+.moon-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.moon-arc {
+  width: 100%;
+  height: 150px;
+  position: relative;
+}
+.moon {
+  position: absolute;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: #0a0b0d;
+  box-shadow: inset -4px 0 0 white;
+}
+.moon.active {
+  width: 64px; height: 64px;
+  background: white;
+  box-shadow: 0 0 20px var(--accent-glow);
+  left: 50%; top: 20px;
+  transform: translateX(-50%);
+}
+.m1 { left: 10%; bottom: 10%; box-shadow: none; border: 1px solid rgba(255,255,255,0.2); }
+.m2 { left: 25%; top: 50%; box-shadow: inset -8px 0 0 white; }
+.m4 { right: 25%; top: 50%; box-shadow: inset 8px 0 0 white; }
+.m5 { right: 10%; bottom: 10%; box-shadow: inset 16px 0 0 white; background: white; }
+.moon-label {
+  color: var(--accent);
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: 600;
+  margin-top: 24px;
+}
+
+/* Sidebar */
+.sidebar {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+.sidebar-title {
+  color: var(--accent);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-bottom: 32px;
+  text-align: center;
+}
+.forecast-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.forecast-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text-main);
+  font-size: 15px;
+}
+.f-time { width: 45px; }
+.f-icon-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--accent);
+}
+.f-speed { font-size: 11px; }
+.f-temp { width: 30px; text-align: right; }
+.f-dot { color: rgba(255,255,255,0.2); letter-spacing: 2px;}
+
+@media (max-width: 1100px) {
+  .dashboard { grid-template-columns: 1fr; }
+  .bottom-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+  .moon-card { grid-column: span 2; }
+}
