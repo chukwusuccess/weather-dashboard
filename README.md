@@ -4,8 +4,6 @@ Hey there! Welcome to my Weather Dashboard project. 👋
 
 I built this dashboard to challenge myself with some precise UI/UX implementation. The goal was to take a gorgeous, modern design and bring it to life using just clean HTML, CSS, and plain JavaScript—no heavy frameworks or bulky libraries holding it together! 
 
-*(Note: To add a preview of your app here, just take a screenshot, save it in the `assets/` folder as `preview.png`, and replace this line with `![Dashboard Preview](./assets/preview.png)`)*
-
 ## ✨ What makes this cool?
 
 - **It's alive:** I hooked it up to the [Open-Meteo API](https://open-meteo.com/), so it actually pulls real-time weather, humidity, UV index, wind speed, and a 7-day forecast for any city you search for.
