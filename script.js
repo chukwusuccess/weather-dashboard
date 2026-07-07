@@ -6,15 +6,6 @@ const weatherTop = document.getElementById('weather-top');
 const weatherBottom = document.getElementById('weather-bottom');
 const sidebarWrapper = document.getElementById('sidebar-wrapper');
 
-// Theme Toggle
-const themeBtn = document.getElementById('theme-toggle');
-const themeIcon = document.getElementById('theme-icon');
-themeBtn.addEventListener('click', () => {
-  document.body.classList.toggle('light-mode');
-  themeIcon.setAttribute('data-lucide', document.body.classList.contains('light-mode') ? 'moon' : 'sun');
-  lucide.createIcons({ nameAttr: 'data-lucide' });
-});
-
 // Error handling toast
 function showError(message) {
   const toast = document.getElementById('error-toast');
