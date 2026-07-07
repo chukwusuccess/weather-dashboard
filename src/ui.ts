@@ -68,21 +68,3 @@ export function setUIState(state: UIState): void {
 
   lucide.createIcons();
 }
-
-/** ponytail: bridge for script.js until search/API handlers move to TypeScript. */
-export function setUIStateLegacy(state: string, message = ''): void {
-  switch (state) {
-    case 'empty':
-      setUIState({ status: 'empty' });
-      break;
-    case 'loading':
-      setUIState({ status: 'loading' });
-      break;
-    case 'error':
-      setUIState({ status: 'error', message });
-      break;
-    case 'success':
-      setUIState({ status: 'success' });
-      break;
-  }
-}
