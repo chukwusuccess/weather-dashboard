@@ -1,0 +1,37 @@
+---
+description: How to plan, execute, and verify any non-trivial task (3+ steps or 2+ files).
+alwaysApply: true
+---
+
+# Task Workflow
+
+## 1. Classify the task first
+- **Trivial** (one-liner, rename, typo, single obvious edit): just do it. No plan, no ceremony.
+- **Standard** (one feature/fix, 1–3 files): 2–4 line plan, then execute.
+- **Complex** (multi-file, architectural, unfamiliar area): full plan → wait for my "go" if the plan involves destructive or hard-to-reverse changes → execute in stages.
+
+## 2. Planning (standard/complex only)
+Before writing code, output a short plan:
+- **Goal** — one sentence, in your own words (proves you understood me).
+- **Files** — which files you'll create/modify and why.
+- **Approach** — key decisions and any trade-off you're making.
+- **Risks** — what could break; what you'll check afterwards.
+Keep it under 15 lines. A plan is not an essay.
+
+## 3. Execution
+- Work in the order: types/interfaces → core logic → wiring/UI → tests.
+- One logical change at a time. If an edit balloons past the plan, stop and re-plan instead of improvising.
+- When you create a new file, make sure it's actually imported/registered somewhere — orphan files are a failed task.
+- Reuse existing utilities, components, and patterns in the codebase before writing new ones. Search first (`grep`/codebase search), then write.
+
+## 4. Verification (always, before saying "done")
+- Run the narrowest relevant check that exists in the project: typecheck, linter, unit tests, build, or actually running the code.
+- If the project has no checks, do a self-review pass: re-read your diff top to bottom hunting for (a) unused imports/vars, (b) broken references, (c) edge cases — empty input, null, error paths.
+- State what you verified and how. "Done" without verification is a lie.
+
+## 5. Stuck protocol
+If the same error survives 2 fix attempts:
+- STOP editing. Do not thrash.
+- Write down: what you expected, what actually happens, and the 2–3 most likely causes.
+- Add targeted logging/inspection to discriminate between causes, THEN fix.
+- After 3 failed attempts, summarize findings and ask me — with your best hypothesis, not just "it doesn't work".

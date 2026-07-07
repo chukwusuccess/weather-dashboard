@@ -1,0 +1,35 @@
+---
+description: Python standards — typing, idioms, project hygiene.
+globs: *.py
+alwaysApply: false
+---
+
+# Python Standards
+
+## Style & Idioms
+- PEP 8 naming: `snake_case` functions/variables, `PascalCase` classes, `UPPER_SNAKE` constants.
+- f-strings for formatting; `pathlib.Path` over `os.path`; comprehensions when they fit on one line, loops when they don't.
+- Truthiness idioms: `if not items:` over `if len(items) == 0:`; `is None` / `is not None` for None checks.
+- No mutable default arguments (`def f(x, items=None): items = items or []`).
+
+## Typing
+- Type hints on every function signature (params + return). Modern syntax: `list[str]`, `str | None`.
+- `dataclass` (or pydantic when validating) over dicts-of-dicts for structured data.
+- `TypedDict`/`Protocol` when you need structural typing; avoid `Any` — it defeats the point.
+
+## Errors
+- Catch the narrowest exception that can occur. Bare `except:` and `except Exception: pass` are forbidden.
+- Raise specific exception types with actionable messages; define custom exceptions for domain errors.
+- Use context managers (`with`) for anything that opens: files, connections, locks, sessions.
+
+## Project Hygiene
+- Every project runs in a virtual environment; dependencies declared in `pyproject.toml` (or `requirements.txt` if the project already uses it) — never "pip install and forget".
+- Entry-point guard: `if __name__ == "__main__":` on every runnable script.
+- No work at import time (network calls, file reads, heavy computation) — imports must be instant and safe.
+- Logging module over `print()` in anything beyond a throwaway script.
+
+## Gotchas to actively avoid
+- Late-binding closures in loops (`for i in ...: callbacks.append(lambda: i)`).
+- Modifying a list while iterating over it.
+- Comparing floats with `==` (use `math.isclose`).
+- Relying on dict ordering across serialization boundaries.
