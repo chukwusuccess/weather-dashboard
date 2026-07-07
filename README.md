@@ -45,6 +45,7 @@ The project uses [Vite](https://vite.dev/) as its dev server and build tool, so 
 | `npm run build` | Build the production bundle into `dist/`. |
 | `npm run preview` | Serve the built `dist/` output locally to verify a production build. |
 | `npm run typecheck` | Run the TypeScript compiler in check-only mode (no output). |
+| `npm test` | Run the assert-based self-checks for the pure formatting helpers. |
 
 ## 🤝 Want to contribute?
 
