@@ -137,17 +137,21 @@ function renderForecast(daily: ForecastResponse['daily']): void {
   list.innerHTML = '';
 
   for (let i = 0; i < 7; i++) {
-    if (i >= daily.time.length) break;
-
     const dayStr = daily.time[i];
+    const maxTemp = daily.temperature_2m_max[i];
+    const code = daily.weather_code[i];
+    // Guard against the API returning mismatched array lengths: stop at the
+    // first row missing any of the parallel fields we render.
+    if (dayStr === undefined || maxTemp === undefined || code === undefined) break;
+
     const dayDate = new Date(dayStr + 'T00:00:00');
     const isToday = i === 0;
     const dayName = isToday
       ? 'Today'
       : dayDate.toLocaleDateString('en-US', { weekday: 'short' });
 
-    const temp = Math.round(daily.temperature_2m_max[i]);
-    const weatherInfo = wmoInfo(daily.weather_code[i]);
+    const temp = Math.round(maxTemp);
+    const weatherInfo = wmoInfo(code);
 
     // All interpolated values are internal constants or Math-rounded numbers.
     list.innerHTML += `
