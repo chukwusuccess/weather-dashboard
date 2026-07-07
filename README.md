@@ -44,6 +44,7 @@ The project uses [Vite](https://vite.dev/) as its dev server and build tool, so 
 | `npm run dev` | Start the Vite dev server with hot reload. |
 | `npm run build` | Build the production bundle into `dist/`. |
 | `npm run preview` | Serve the built `dist/` output locally to verify a production build. |
+| `npm run typecheck` | Run the TypeScript compiler in check-only mode (no output). |
 
 ## 🤝 Want to contribute?
 
