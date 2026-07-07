@@ -1,9 +1,9 @@
 /**
  * TypeScript entry point for the weather dashboard.
  *
- * Migration in progress: this module currently owns icon initialization and
- * the header clock/date. The rest of the app still lives in script.js and is
- * ported step by step.
+ * Migration in progress: this module currently owns icon initialization,
+ * the header clock/date, and theme toggling. The rest of the app still
+ * lives in script.js and is ported step by step.
  */
 
 lucide.createIcons();
@@ -54,3 +54,15 @@ function updateTime(): void {
 
 setInterval(updateTime, 1000);
 updateTime();
+
+const themeBtn = document.getElementById('theme-toggle');
+const themeIcon = document.getElementById('theme-icon');
+
+if (themeBtn && themeIcon) {
+  themeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+    const iconName = document.body.classList.contains('light-mode') ? 'moon' : 'sun';
+    themeIcon.setAttribute('data-lucide', iconName);
+    lucide.createIcons({ nameAttr: 'data-lucide' });
+  });
+}
