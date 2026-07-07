@@ -21,3 +21,12 @@ build/
 
 # Claude Code personal overrides
 .claude/settings.local.json
+
+# Local agent/editor tooling (not part of the app)
+.cursor/
+.cursorignore
+.cursorindexingignore
+AGENTS.md
+CLAUDE.md
+docs/codex-repos-list.md
+docs/codex-skills-list.md
