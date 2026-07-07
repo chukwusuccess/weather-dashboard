@@ -2,58 +2,16 @@ import type {
   ForecastResponse,
   GeocodingResult,
   GeocodingSearchResponse,
-  WmoWeatherCode,
-  WmoWeatherCodeMap,
-  WmoWeatherInfo,
 } from './types/open-meteo';
+import { formatTime, uvLevel, wmoInfo } from './lib/weather-format';
 import { setUIState, showError } from './ui';
 
 const GEOCODING_TIMEOUT_MS = 5000;
 const FORECAST_TIMEOUT_MS = 8000;
 
-/** WMO weather interpretation codes -> label + Lucide icon name. */
-const WMO_MAP: WmoWeatherCodeMap = {
-  0: { label: 'Clear', icon: 'sun' },
-  1: { label: 'Mostly Clear', icon: 'cloud-sun' },
-  2: { label: 'Partly Cloudy', icon: 'cloud-sun' },
-  3: { label: 'Cloudy', icon: 'cloud' },
-  45: { label: 'Fog', icon: 'cloud-fog' },
-  48: { label: 'Fog', icon: 'cloud-fog' },
-  51: { label: 'Drizzle', icon: 'cloud-drizzle' },
-  53: { label: 'Drizzle', icon: 'cloud-drizzle' },
-  55: { label: 'Drizzle', icon: 'cloud-drizzle' },
-  61: { label: 'Rain', icon: 'cloud-rain' },
-  63: { label: 'Rain', icon: 'cloud-rain' },
-  65: { label: 'Heavy Rain', icon: 'cloud-rain' },
-  71: { label: 'Snow', icon: 'snowflake' },
-  73: { label: 'Snow', icon: 'snowflake' },
-  75: { label: 'Heavy Snow', icon: 'snowflake' },
-  80: { label: 'Showers', icon: 'cloud-rain' },
-  81: { label: 'Showers', icon: 'cloud-rain' },
-  82: { label: 'Heavy Showers', icon: 'cloud-rain' },
-  95: { label: 'Storm', icon: 'cloud-lightning' },
-  96: { label: 'Storm', icon: 'cloud-lightning' },
-  99: { label: 'Heavy Storm', icon: 'cloud-lightning' },
-};
-
-const FALLBACK_WEATHER: WmoWeatherInfo = { label: 'Cloudy', icon: 'cloud' };
-
-function wmoInfo(code: number): WmoWeatherInfo {
-  // API returns an arbitrary number; look it up in the known-code map and fall
-  // back to Cloudy for codes we don't render explicitly.
-  return WMO_MAP[code as WmoWeatherCode] ?? FALLBACK_WEATHER;
-}
-
 function setText(id: string, text: string): void {
   const el = document.getElementById(id);
   if (el) el.textContent = text;
-}
-
-function formatTime(iso: string | undefined): string {
-  if (!iso) return '-- : --';
-  return new Date(iso)
-    .toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })
-    .replace(':', ' : ');
 }
 
 export async function getCoordinates(city: string): Promise<GeocodingResult> {
@@ -158,21 +116,7 @@ function renderWeather(data: ForecastResponse, locationName: string): void {
   setText('rainfall-val', `${todayRain.toFixed(1)}mm`);
 
   const uv = Math.round(daily.uv_index_max[0] || 0);
-  let uvText = 'Low';
-  let uvPos = 10;
-  if (uv >= 3 && uv <= 5) {
-    uvText = 'Moderate';
-    uvPos = 30;
-  } else if (uv >= 6 && uv <= 7) {
-    uvText = 'High';
-    uvPos = 50;
-  } else if (uv >= 8 && uv <= 10) {
-    uvText = 'Very High';
-    uvPos = 70;
-  } else if (uv >= 11) {
-    uvText = 'Extreme';
-    uvPos = 90;
-  }
+  const { label: uvText, position: uvPos } = uvLevel(uv);
 
   setText('uv-val', String(uv));
   setText('uv-sub', uvText);
