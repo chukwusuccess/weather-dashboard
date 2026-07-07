@@ -1,0 +1,32 @@
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+
+# Dependencies and local server output
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build/cache output
+dist/
+build/
+.cache/
+
+# Claude Code personal overrides
+.claude/settings.local.json
+
+# Local agent/editor tooling (not part of the app)
+.cursor/
+.cursorignore
+.cursorindexingignore
+AGENTS.md
+CLAUDE.md
+docs/codex-repos-list.md
+docs/codex-skills-list.md

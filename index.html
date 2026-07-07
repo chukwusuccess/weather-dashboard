@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Weather Dashboard</title>
   <link rel="stylesheet" href="style.css">
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Pinned exact file: avoids the @latest 302 redirect and its 60s cache
+       (which refetched ~411KB on every reload). Pinned files are served
+       immutable with a 1-year cache. -->
+  <script src="https://unpkg.com/lucide@1.23.0/dist/umd/lucide.min.js"></script>
 </head>
 <body>
   <div id="error-toast" class="error-toast"></div>
@@ -175,6 +178,6 @@
       </div>
     </div>
   </div>
-  <script src="script.js"></script>
+  <script type="module" src="/src/main.ts"></script>
 </body>
 </html>
