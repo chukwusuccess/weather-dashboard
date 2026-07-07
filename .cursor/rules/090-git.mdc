@@ -1,0 +1,26 @@
+---
+description: Git and version control conventions — commits, branches, PRs. Apply when committing, branching, or preparing pull requests.
+alwaysApply: false
+---
+
+# Git Conventions
+
+## Commits
+- Conventional Commits format: `type(scope): imperative summary`
+  - `feat`, `fix`, `refactor`, `style`, `docs`, `test`, `chore`, `perf`, `build`, `ci`
+  - Example: `fix(search): abort stale requests before rendering suggestions`
+- Summary ≤ 72 chars, imperative mood ("add", not "added"/"adds"). Body explains WHY when the diff alone can't.
+- One logical change per commit. Never mix a feature with an unrelated refactor or formatting sweep.
+- Never commit: secrets, `.env`, build artifacts, `node_modules`, `.DS_Store`, editor junk, commented-out code, `console.log` debugging leftovers.
+
+## Workflow
+- Never commit or push unless I explicitly ask.
+- Before committing: run `git status` and `git diff --staged` — stage deliberately (specific paths), review what's actually going in. No blind `git add -A` when unrelated files are dirty.
+- Work on branches for anything non-trivial: `feat/…`, `fix/…`, `chore/…`. Don't commit straight to `main` unless the repo is single-player and I say so.
+- Destructive operations (`push --force`, `reset --hard`, `checkout .`, `clean`, history rewrites, deleting branches) — NEVER without my explicit confirmation for that specific command. Prefer `--force-with-lease` if force-push is approved.
+- Don't amend or rebase commits that are already pushed/shared.
+
+## Pull Requests
+- Title follows the same conventional format as commits.
+- Description: what changed, why, how it was tested, screenshots for UI changes, and any follow-ups deliberately left out.
+- Keep PRs reviewable: one concern, roughly ≤ 400 changed lines where possible; split otherwise.

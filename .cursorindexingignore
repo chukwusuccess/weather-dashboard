@@ -1,0 +1,57 @@
+# ============================================================================
+# .cursorindexingignore — excluded from the SEARCH INDEX only.
+# ----------------------------------------------------------------------------
+# The AI can still open and read these files when it deliberately needs to
+# (e.g. checking an exact dependency version in a lockfile) — they just stop
+# polluting codebase search and semantic retrieval with low-signal bulk.
+#
+# Rule of thumb: "noisy in search, occasionally useful on purpose" → here.
+# "Never useful or never safe" → .cursorignore instead.
+# ============================================================================
+
+# --- Lockfiles (bulk noise in search; still readable for version checks) ----
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+bun.lockb
+bun.lock
+Cargo.lock
+poetry.lock
+uv.lock
+Pipfile.lock
+Gemfile.lock
+composer.lock
+go.sum
+flake.lock
+
+# --- Generated code (search should find the SOURCE, not the output) ----------
+*.min.js
+*.min.css
+*.map
+*.generated.*
+*_generated.*
+*.pb.go
+*_pb2.py
+*.g.dart
+CHANGELOG.md
+
+# --- Test snapshots & fixtures (bulk that drowns out real code in search) ----
+__snapshots__/
+*.snap
+fixtures/
+testdata/
+cassettes/
+
+# --- Vendored / third-party source kept in-repo -------------------------------
+third_party/
+extern/
+
+# --- Large data files that are legitimate project content ---------------------
+*.csv
+*.tsv
+*.ndjson
+*.geojson
+
+# ============================================================================
+# Per-project additions go below this line (keep the template above generic)
+# ============================================================================

@@ -1,0 +1,29 @@
+---
+description: Testing standards — what to test, how to structure tests, and when tests are required. Apply when writing or modifying tests, or when a change needs test coverage.
+globs: *.test.*,*.spec.*,**/tests/**,**/__tests__/**,test_*.py,*_test.go
+alwaysApply: false
+---
+
+# Testing Standards
+
+## When tests are required
+- New logic with branching, math, parsing, or data transformation → test it.
+- Every bug fix → first write a test that reproduces the bug (red), then fix (green). The test is the proof and the regression guard.
+- Pure UI layout tweaks, copy changes, config → tests optional; don't write ceremony tests that assert the framework works.
+
+## What a good test looks like
+- **Arrange–Act–Assert**, visibly separated. One behavior per test.
+- Name states the scenario and expectation: `test("returns empty list when no cities match query")` — not `test("search works")`.
+- Test behavior through the public interface, not implementation details. A refactor that preserves behavior should not break tests.
+- Deterministic: no real network, no real clock, no sleeps, no test-order dependence. Inject/fake time and I/O.
+- Cover the unhappy paths — empty input, null/undefined, boundary values (0, 1, max), malformed data, failure of dependencies. The happy path is the least interesting test.
+
+## Test doubles
+- Mock at system boundaries (HTTP, DB, filesystem) — never mock the function under test or its immediate collaborators just to force a result.
+- Prefer fakes/stubs with realistic data over deep mock chains (`mock.foo.mockReturnValue(mock2)` chains mean the design needs work).
+- Fixture data should look like real data, including awkward realistic cases (unicode names, empty arrays, long strings).
+
+## Discipline
+- Run the tests after writing them and show the result. A test you never ran is a rumor.
+- A failing test is never "fixed" by deleting it, weakening the assertion, or adding a skip — fix the code or fix the test's wrong expectation, and say which it was.
+- Keep tests fast; anything slow (integration/e2e) is separated so the fast suite stays sub-second.

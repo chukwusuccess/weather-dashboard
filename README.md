@@ -20,14 +20,30 @@ I wanted to keep it raw and dependency-free:
 
 ## 🚀 Want to run it yourself?
 
-It's super simple. You don't need `npm install` or any build tools.
+The project uses [Vite](https://vite.dev/) as its dev server and build tool, so you'll need [Node.js](https://nodejs.org/) (v18+) installed.
 
 1. **Clone it:**
    ```bash
    git clone https://github.com/chukwusuccess/weather-dashboard.git
+   cd weather-dashboard
    ```
-2. **Open it:**
-   Just double-click on `index.html` to open it in your browser. That's it! (Though using something like VS Code's Live Server makes tweaking it more fun).
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+3. **Start the dev server:**
+   ```bash
+   npm run dev
+   ```
+   Then open the URL Vite prints (usually `http://localhost:5173`).
+
+### Available scripts
+
+| Script | What it does |
+| --- | --- |
+| `npm run dev` | Start the Vite dev server with hot reload. |
+| `npm run build` | Build the production bundle into `dist/`. |
+| `npm run preview` | Serve the built `dist/` output locally to verify a production build. |
 
 ## 🤝 Want to contribute?
 
