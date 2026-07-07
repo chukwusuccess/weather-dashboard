@@ -56,13 +56,15 @@ setInterval(updateTime, 1000);
 updateTime();
 
 const themeBtn = document.getElementById('theme-toggle');
-const themeIcon = document.getElementById('theme-icon');
 
-if (themeBtn && themeIcon) {
-  themeBtn.addEventListener('click', () => {
-    document.body.classList.toggle('light-mode');
-    const iconName = document.body.classList.contains('light-mode') ? 'moon' : 'sun';
-    themeIcon.setAttribute('data-lucide', iconName);
-    lucide.createIcons({ nameAttr: 'data-lucide' });
-  });
-}
+themeBtn?.addEventListener('click', () => {
+  const isLightMode = document.body.classList.toggle('light-mode');
+
+  // Re-query the icon on each click: lucide.createIcons() renders by calling
+  // replaceChild, so any node captured once at load becomes a detached orphan
+  // after the next render (e.g. setUIState during a search). The id is carried
+  // onto the replacement svg, so getElementById always returns the live node.
+  const themeIcon = document.getElementById('theme-icon');
+  themeIcon?.setAttribute('data-lucide', isLightMode ? 'moon' : 'sun');
+  lucide.createIcons({ nameAttr: 'data-lucide' });
+});
