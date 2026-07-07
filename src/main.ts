@@ -2,11 +2,12 @@
  * TypeScript entry point for the weather dashboard.
  *
  * Migration in progress: this module currently owns icon initialization,
- * the header clock/date, theme toggling, and UI state. The rest of the app
+ * the header clock/date, theme toggling, and UI state. Search/autocomplete
  * still lives in script.js and is ported step by step.
  */
 
 import { setUIState, setUIStateLegacy, showError } from './ui';
+import { fetchWeather, getCoordinates } from './weather';
 
 lucide.createIcons();
 
@@ -73,4 +74,6 @@ themeBtn?.addEventListener('click', () => {
 
 window.setUIState = setUIStateLegacy;
 window.showError = showError;
+window.getCoordinates = getCoordinates;
+window.fetchWeather = fetchWeather;
 setUIState({ status: 'empty' });
