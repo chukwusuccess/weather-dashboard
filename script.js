@@ -1,57 +1,3 @@
-// Elements
-const statusContainer = document.getElementById('status-container');
-const statusIcon = document.getElementById('status-icon');
-const statusText = document.getElementById('status-text');
-const weatherTop = document.getElementById('weather-top');
-const weatherBottom = document.getElementById('weather-bottom');
-const sidebarWrapper = document.getElementById('sidebar-wrapper');
-
-// Error handling toast
-function showError(message) {
-  const toast = document.getElementById('error-toast');
-  toast.textContent = message;
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 4000);
-}
-
-// Set UI State
-function setUIState(state, message = '') {
-  if (state === 'empty') {
-    weatherTop.style.display = 'none';
-    weatherBottom.style.display = 'none';
-    sidebarWrapper.style.display = 'none';
-    statusContainer.style.display = 'flex';
-    statusIcon.setAttribute('data-lucide', 'search');
-    statusIcon.classList.remove('spin');
-    statusIcon.style.color = 'var(--accent)';
-    statusText.textContent = 'Search for a city to see live weather data.';
-  } else if (state === 'loading') {
-    weatherTop.style.display = 'none';
-    weatherBottom.style.display = 'none';
-    sidebarWrapper.style.display = 'none';
-    statusContainer.style.display = 'flex';
-    statusIcon.setAttribute('data-lucide', 'loader-2');
-    statusIcon.classList.add('spin');
-    statusIcon.style.color = 'var(--accent)';
-    statusText.textContent = 'Loading weather data...';
-  } else if (state === 'error') {
-    weatherTop.style.display = 'none';
-    weatherBottom.style.display = 'none';
-    sidebarWrapper.style.display = 'none';
-    statusContainer.style.display = 'flex';
-    statusIcon.setAttribute('data-lucide', 'cloud-off');
-    statusIcon.classList.remove('spin');
-    statusIcon.style.color = '#ff4d4d'; // Red for error
-    statusText.textContent = message || 'City not found. Try another city.';
-  } else if (state === 'success') {
-    statusContainer.style.display = 'none';
-    weatherTop.style.display = 'grid';
-    weatherBottom.style.display = 'grid';
-    sidebarWrapper.style.display = 'flex';
-  }
-  lucide.createIcons(); // re-init state icon
-}
-
 // Fetch City Coordinates
 async function getCoordinates(city) {
   const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=en&format=json`;
@@ -235,9 +181,6 @@ async function handleSearch() {
     setUIState('error', error.message);
   }
 }
-
-// Initialize empty state instead of auto-fetching
-setUIState('empty');
 
 // Autocomplete Logic
 const cityInput = document.getElementById('city-input');
