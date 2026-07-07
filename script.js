@@ -1,5 +1,3 @@
-lucide.createIcons();
-
 // Elements
 const statusContainer = document.getElementById('status-container');
 const statusIcon = document.getElementById('status-icon');
@@ -7,18 +5,6 @@ const statusText = document.getElementById('status-text');
 const weatherTop = document.getElementById('weather-top');
 const weatherBottom = document.getElementById('weather-bottom');
 const sidebarWrapper = document.getElementById('sidebar-wrapper');
-
-function updateTime() {
-  const now = new Date();
-  const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }).replace(':', ' : ');
-  document.getElementById('current-time').textContent = timeStr;
-  
-  const days = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
-  const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-  document.getElementById('loc-date').innerHTML = `${days[now.getDay()]}<br>${now.getDate()} ${months[now.getMonth()]}, ${now.getFullYear()}`;
-}
-setInterval(updateTime, 1000);
-updateTime();
 
 // Theme Toggle
 const themeBtn = document.getElementById('theme-toggle');
