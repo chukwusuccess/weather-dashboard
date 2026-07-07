@@ -2,7 +2,7 @@
 
 Hey there! Welcome to my Weather Dashboard project. 👋
 
-I built this dashboard to challenge myself with some precise UI/UX implementation. The goal was to take a gorgeous, modern design and bring it to life using just clean HTML, CSS, and plain JavaScript—no heavy frameworks or bulky libraries holding it together! 
+I built this dashboard to challenge myself with some precise UI/UX implementation. The goal was to take a gorgeous, modern design and bring it to life with clean HTML, CSS, and TypeScript—no heavy UI framework, just a fast Vite toolchain underneath.
 
 ## ✨ What makes this cool?
 
@@ -13,10 +13,24 @@ I built this dashboard to challenge myself with some precise UI/UX implementatio
 
 ## 🛠️ What's under the hood?
 
-I wanted to keep it raw and dependency-free:
-- **HTML5** & **CSS3**: Using CSS Grid and Flexbox for a layout that looks great on desktop, tablet, and mobile.
-- **Vanilla JavaScript (ES6+)**: Handling the API calls (`async/await`), timeouts, theme toggling, and injecting the forecast data into the DOM.
-- **Lucide Icons**: The only external asset I used. They are clean, lightweight, and perfect for the UI.
+- **HTML5** & **CSS3**: CSS Grid and Flexbox for a layout that looks great on desktop, tablet, and mobile.
+- **TypeScript**: Typed API responses, a discriminated UI state machine, debounced search with request cancellation, and strict compiler checks.
+- **Vite**: Dev server with hot reload and a production build into `dist/`.
+- **Open-Meteo**: Free geocoding + forecast APIs (no API key required).
+- **Lucide Icons**: Loaded from a pinned CDN build for the UI icons.
+
+### Project layout
+
+| Path | Purpose |
+| --- | --- |
+| `index.html` | App shell and markup |
+| `style.css` | Layout and theme styles |
+| `src/main.ts` | Entry point (clock, theme, boot) |
+| `src/search.ts` | Search + autocomplete |
+| `src/weather.ts` | Geocoding + forecast fetch + render |
+| `src/ui.ts` | UI state machine + error toast |
+| `src/lib/` | Pure formatting helpers + self-check |
+| `src/types/` | Open-Meteo and UI TypeScript types |
 
 ## 🚀 Want to run it yourself?
 
@@ -46,6 +60,15 @@ The project uses [Vite](https://vite.dev/) as its dev server and build tool, so 
 | `npm run preview` | Serve the built `dist/` output locally to verify a production build. |
 | `npm run typecheck` | Run the TypeScript compiler in check-only mode (no output). |
 | `npm test` | Run the assert-based self-checks for the pure formatting helpers. |
+
+### Production build
+
+```bash
+npm run build
+npm run preview   # optional: verify dist/ locally
+```
+
+Deploy the contents of `dist/` to any static host (Netlify, Vercel, GitHub Pages, Cloudflare Pages, etc.). The build outputs a bundled `index.html`, CSS, and JS; Lucide icons are still loaded from the pinned unpkg URL in `index.html`.
 
 ## 🤝 Want to contribute?
 

@@ -1,9 +1,8 @@
 /**
- * TypeScript entry point for the weather dashboard.
+ * Weather dashboard entry point.
  *
- * Migration in progress: this module currently owns icon initialization,
- * the header clock/date, theme toggling, UI state, weather fetching, and
- * search/autocomplete.
+ * Boots icon rendering, the header clock/date, theme toggle, UI state, and
+ * search handlers. Weather fetching lives in ./weather.ts.
  */
 
 import { initSearch } from './search';
